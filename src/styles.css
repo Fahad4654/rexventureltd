@@ -36,6 +36,7 @@
 @media(max-width:640px){
   html,body{width:100%;max-width:100%;overflow-x:hidden}
   .app{width:100%;max-width:100%;overflow-x:hidden}
+  .header{position:fixed;top:0;left:0;right:0;width:100%;z-index:100}
   .hero{width:100%;min-width:0}
   .hero-content{width:100%;min-width:0}
   .hero-actions,.hero-actions .button{max-width:100%}
