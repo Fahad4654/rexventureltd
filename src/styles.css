@@ -14,3 +14,20 @@
 .card-shade{background:linear-gradient(180deg,rgba(2,14,26,.02) 0%,rgba(2,14,26,.08) 38%,rgba(2,14,26,.78) 100%);transition:background .35s ease}
 .venture-card:hover .card-image{transform:none;opacity:1}
 .venture-card:hover .card-shade{background:linear-gradient(180deg,rgba(2,14,26,.02) 0%,rgba(2,14,26,.04) 35%,rgba(2,14,26,.82) 100%)}
+
+/* Give artwork its own area and keep all card copy on a solid readable panel. */
+.venture-card:has(.card-image){background:#081d2c}
+.venture-card:has(.card-image) .card-image{top:0;left:0;right:0;bottom:auto;width:100%;height:58%;object-fit:contain;background:#102d3d}
+.venture-card:has(.card-image) .card-shade{background:linear-gradient(180deg,transparent 0%,transparent 48%,rgba(6,24,39,.55) 57%,#061827 67%,#061827 100%)}
+.venture-card:has(.card-image) .card-content{z-index:2}
+
+/* Glassmorphic card finish. */
+.venture-card{background:rgba(255,255,255,.075);border:1px solid rgba(205,239,247,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 18px 45px rgba(0,0,0,.2);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+.venture-card::before{content:'';position:absolute;inset:1px;border-radius:7px;background:linear-gradient(135deg,rgba(255,255,255,.16),transparent 28%,transparent 72%,rgba(255,255,255,.06));pointer-events:none;z-index:1}
+.venture-card:hover{transform:translateY(-6px);border-color:rgba(210,247,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 24px 55px rgba(0,0,0,.34)}
+.venture-card.cyan:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 24px 55px rgba(59,214,223,.2)}
+.venture-card.green:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 24px 55px rgba(165,229,106,.18)}
+.venture-card.purple:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 24px 55px rgba(196,137,255,.2)}
+.venture-card.orange:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 24px 55px rgba(255,184,103,.2)}
+.card-content>div:last-child{padding:16px 15px 13px;margin:0 -8px -8px;border:1px solid rgba(220,245,250,.15);border-radius:15px;background:rgba(4,20,32,.62);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.venture-card.cyan .card-content>div:last-child{background:rgba(4,39,55,.68)}
