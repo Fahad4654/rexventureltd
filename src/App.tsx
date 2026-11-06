@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowUpRight, Check, ChevronRight, Globe2, Menu, MessageCircle, ShieldCheck, Sparkles, Wifi, X } from 'lucide-react'
+import { ArrowUpRight, CalendarDays, Check, ChevronRight, ExternalLink, Globe2, MapPin, Menu, MessageCircle, Phone, ShieldCheck, Sparkles, Wifi, X } from 'lucide-react'
 
 type Language = 'en' | 'bn'
 type Copy = { [key: string]: string }
@@ -17,6 +17,7 @@ const copy: Record<Language, Copy> = {
     agroTitle: 'Rex Agro', agroText: 'Fresh, thoughtful farming and healthy food products that connect better living with the land.', agroTag: 'Better living',
     learn: 'Learn more', whyEyebrow: 'The Rex difference', whyTitle: 'Built on trust. Designed for the future.', whyText: 'We bring energy, attention to detail and local understanding to every service we offer.',
     reason1: 'People-first service', reason1Text: 'We listen carefully, explain clearly and stay close after the sale.', reason2: 'Practical innovation', reason2Text: 'Better tools and smarter systems that make daily life easier.', reason3: 'Always dependable', reason3Text: 'Consistency matters. We show up when it matters most.',
+    placesEyebrow: 'Visit the places', placesTitle: 'Find the Rex service that fits your world.', placesText: 'Explore our connected ventures and choose the right team for your next need.', visit: 'Visit website', contactNumbers: 'Contact numbers', appointment: 'Book an appointment', mapTitle: 'Our service area', mapText: 'Rajshahi, Bangladesh · Open in Google Maps', contactForm: 'Open contact form',
     ctaTitle: 'Have a project, question or idea?', ctaText: 'Let’s find the right Rex service for you. Our team is ready to help.', ctaButton: 'Start a conversation', footer: 'Copyright © Rex Venture LTD · Focused on details.'
   },
   bn: {
@@ -31,6 +32,7 @@ const copy: Record<Language, Copy> = {
     agroTitle: 'রেক্স অ্যাগ্রো', agroText: 'জমি ও উন্নত জীবনের সাথে সংযোগ তৈরি করা স্বাস্থ্যকর খাদ্য ও চিন্তাশীল কৃষি উদ্যোগ।', agroTag: 'সুস্থ জীবন',
     learn: 'বিস্তারিত দেখুন', whyEyebrow: 'রেক্সের বিশেষত্ব', whyTitle: 'বিশ্বাসের উপর তৈরি। ভবিষ্যতের জন্য প্রস্তুত।', whyText: 'আমাদের প্রতিটি সেবায় থাকে উদ্যম, খুঁটিনাটিতে মনোযোগ এবং স্থানীয় অভিজ্ঞতা।',
     reason1: 'মানুষকে অগ্রাধিকার', reason1Text: 'মনোযোগ দিয়ে শুনি, সহজভাবে বুঝিয়ে বলি এবং সেবার পরেও পাশে থাকি।', reason2: 'ব্যবহারিক উদ্ভাবন', reason2Text: 'দৈনন্দিন জীবন সহজ করতে উন্নত টুল ও স্মার্ট সিস্টেম।', reason3: 'সবসময় নির্ভরযোগ্য', reason3Text: 'ধারাবাহিকতাই গুরুত্বপূর্ণ। প্রয়োজনের সময় আমরা পাশে থাকি।',
+    placesEyebrow: 'সেবার ঠিকানা', placesTitle: 'আপনার প্রয়োজনের জন্য সঠিক রেক্স সেবা খুঁজুন।', placesText: 'আমাদের সংযুক্ত উদ্যোগগুলো দেখুন এবং আপনার পরবর্তী প্রয়োজনের জন্য সঠিক টিম বেছে নিন।', visit: 'ওয়েবসাইট দেখুন', contactNumbers: 'যোগাযোগের নম্বর', appointment: 'অ্যাপয়েন্টমেন্ট নিন', mapTitle: 'আমাদের সেবার এলাকা', mapText: 'রাজশাহী, বাংলাদেশ · গুগল ম্যাপে দেখুন', contactForm: 'যোগাযোগ ফর্ম খুলুন',
     ctaTitle: 'আপনার কোনো প্রজেক্ট, প্রশ্ন বা আইডিয়া আছে?', ctaText: 'আপনার জন্য সঠিক রেক্স সেবা খুঁজে নিতে আমাদের সাথে কথা বলুন।', ctaButton: 'কথা শুরু করুন', footer: 'কপিরাইট © রেক্স ভেঞ্চার লিমিটেড · খুঁটিনাটিতে মনোযোগী।'
   }
 }
@@ -40,6 +42,12 @@ const ventures = [
   { key: 'security', icon: ShieldCheck, image: '/assets/security.png', color: 'green' },
   { key: 'computers', icon: Sparkles, image: '/assets/computers.jpg', color: 'purple' },
   { key: 'agro', icon: Check, image: '/assets/agro.jpg', color: 'orange' }
+] as const
+
+const places = [
+  { name: 'Rex WiFi', detail: 'High-speed internet and connected living.', href: 'https://sites.google.com/view/rex-wifi/home', color: 'cyan' },
+  { name: 'Rex Agro', detail: 'Fresh farming, salads and better food choices.', href: 'https://sites.google.com/view/rex-agro', color: 'green' },
+  { name: 'Rex Computers', detail: 'PC builds, upgrades and gaming solutions.', href: '#services', color: 'purple' }
 ] as const
 
 export default function App() {
@@ -57,6 +65,7 @@ export default function App() {
       <section className="hero" id="home"><div className="hero-glow" /><div className="hero-content"><p className="eyebrow">{t.eyebrow}</p><h1>{t.heroTitle}<br /><em>{t.heroAccent}</em></h1><p className="hero-text">{t.heroText}</p><div className="hero-actions"><button className="button primary" onClick={() => go('services')}>{t.explore} <ArrowUpRight size={18} /></button><button className="button text-button" onClick={() => go('contact')}>{t.talk} <ChevronRight size={17} /></button></div></div><div className="hero-orbit"><img src="/assets/rex-logo.png" alt="Rex Venture logo" /><span className="orbit-label label-one">01 / CONNECT</span><span className="orbit-label label-two">02 / PROTECT</span><span className="orbit-label label-three">03 / GROW</span></div><div className="scroll-note"><span />{t.scroll}</div></section>
       <section className="services section" id="services"><div className="section-heading"><div><p className="eyebrow">{t.servicesEyebrow}</p><h2>{t.servicesTitle}</h2></div><p>{t.servicesText}</p></div><div className="venture-grid">{ventures.map(({ key, icon: Icon, image, color }, index) => <article className={`venture-card ${color}`} key={key}>{image && <img className="card-image" src={image} alt="" />}<div className="card-shade" /><div className="card-content"><div className="card-top"><span className="number">0{index + 1}</span><span className="card-icon"><Icon size={20} /></span></div><div><span className="tag">{t[`${key}Tag`]}</span><h3>{t[`${key}Title`]}</h3><p>{t[`${key}Text`]}</p><button className="learn">{t.learn} <ArrowUpRight size={16} /></button></div></div></article>)}</div></section>
       <section className="difference section" id="about"><div className="difference-mark"><img src="/assets/rex-logo.png" alt="" /></div><div className="difference-copy"><p className="eyebrow">{t.whyEyebrow}</p><h2>{t.whyTitle}</h2><p className="lead">{t.whyText}</p><div className="reasons"><div><span>01</span><h3>{t.reason1}</h3><p>{t.reason1Text}</p></div><div><span>02</span><h3>{t.reason2}</h3><p>{t.reason2Text}</p></div><div><span>03</span><h3>{t.reason3}</h3><p>{t.reason3Text}</p></div></div></div></section>
+      <section className="places section" id="places"><div className="section-heading"><div><p className="eyebrow">{t.placesEyebrow}</p><h2>{t.placesTitle}</h2></div><p>{t.placesText}</p></div><div className="places-layout"><div className="place-list">{places.map((place, index) => <a className={`place-card ${place.color}`} href={place.href} target={place.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" key={place.name}><span className="place-number">0{index + 1}</span><div><h3>{place.name}</h3><p>{place.detail}</p></div><ExternalLink size={18} /></a>)}<div className="contact-numbers"><div><span className="contact-icon"><Phone size={18} /></span><div><small>{t.contactNumbers}</small><a href="tel:+8801707086543">+880 1707-086543</a></div></div><a className="mini-button" href="https://wa.me/8801707086543" target="_blank" rel="noreferrer"><CalendarDays size={16} /> {t.appointment}</a></div></div><div className="map-card"><div className="map-heading"><span className="contact-icon"><MapPin size={18} /></span><div><h3>{t.mapTitle}</h3><p>{t.mapText}</p></div></div><iframe title={t.mapTitle} src="https://www.google.com/maps?q=24.412185,88.9963&z=17&output=embed" loading="lazy" /><a className="map-link" href="https://www.google.com/maps/search/?api=1&query=24.412185,88.9963" target="_blank" rel="noreferrer">{t.mapText} <ArrowUpRight size={15} /></a></div></div></section>
       <section className="contact section" id="contact"><div><p className="eyebrow">{t.navContact}</p><h2>{t.ctaTitle}</h2><p>{t.ctaText}</p></div><a className="button light" href="https://wa.me/8801707086543" target="_blank" rel="noreferrer"><MessageCircle size={19} /> {t.ctaButton} <ArrowUpRight size={18} /></a></section>
     </main><footer><a className="brand" href="#home"><img src="/assets/rex-logo.png" alt="Rex" /><span>REX<span>VENTURE</span></span></a><p>{t.footer}</p><div className="footer-links"><a href="https://www.facebook.com/share/p/1BU5gVV3mZ/" target="_blank" rel="noreferrer">Facebook</a><a href="https://wa.me/8801707086543" target="_blank" rel="noreferrer">WhatsApp</a></div></footer>
   </div>
