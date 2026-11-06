@@ -63,5 +63,10 @@
 .builder-credit{display:flex;align-items:center;gap:10px}
 .builder-credit small{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#718b9a;max-width:70px;line-height:1.35}
 .bangla .builder-credit small{letter-spacing:.03em;text-transform:none;font-size:11px}
-.builder-credit img{height:44px;width:auto;border-radius:9px;border:1px solid var(--line);box-shadow:0 6px 18px rgba(0,0,0,.28)}
+.builder-credit img{height:44px;width:auto;border-radius:9px;border:1px solid var(--line);box-shadow:0 6px 18px rgba(0,0,0,.28);transition:transform .2s ease,border-color .2s ease}
+.builder-credit a{display:inline-flex;align-items:center;gap:11px;line-height:0;text-decoration:none}
+.builder-credit a:hover img{transform:translateY(-2px);border-color:rgba(59,214,223,.5)}
+.builder-credit a:hover .builder-name{color:var(--cyan)}
+.builder-name{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;letter-spacing:.01em;color:#dcecf1;white-space:nowrap;line-height:1.2}
+.bangla .builder-name{font-family:'Noto Sans Bengali','DM Sans',sans-serif}
 @media(max-width:640px){.builder-credit small{max-width:none}}
